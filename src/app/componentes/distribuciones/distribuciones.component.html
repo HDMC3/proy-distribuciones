@@ -1,0 +1,162 @@
+<style>
+    label{
+        font-size: smaller;
+    }
+</style>
+
+<div>
+    <div class="row container">
+
+        
+
+        <div class="col-4" >
+            <div class="card animated fadeIn">
+                <div class="card-header text-center">
+                    <div class="row row-cols-2">
+                        <div class="col">Parametros</div>
+                        <div class="col">
+                            <span *ngIf="distSeleccionada === 0"  class="badge badge-success animated fadeIn fast" style="font-size: 11pt; color: black;">{{ distSeleccionadaNombre }}</span>
+                            <span *ngIf="distSeleccionada === 1"  class="badge badge-success animated fadeIn fast" style="font-size: 11pt; color: black;">{{ distSeleccionadaNombre }}</span>
+                            <span *ngIf="distSeleccionada === 2"  class="badge badge-success animated fadeIn fast" style="font-size: 11pt; color: black;">{{ distSeleccionadaNombre }}</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="opciones" style="font-size: small; margin-right: 10px;">Seleccion la distribucion:</label>
+                            <div class="btn-group" id="opciones">
+                                <button class="btn btn-outline-success btn-sm btn-block  dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Distribuciones
+                                </button>
+                                <div class="dropdown-menu">
+                                    <button class="dropdown-item" type="button"(click)="seleccionarDistribucion(0)">Binomial</button>
+                                    <button class="dropdown-item" type="button"(click)="seleccionarDistribucion(1)">Hipergeometrica</button>
+                                    <button class="dropdown-item" type="button"(click)="seleccionarDistribucion(2)">Poisson</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div *ngIf="distSeleccionada === 0" id="formBinomial" class="animated fadeIn">
+                            <div class="form-group">
+                                <label for="NBinomial">Poblacion (N)</label>
+                                <input type="number" class="form-control form-control-sm" id="NBinomial" name="Nb" [(ngModel)]="datosBinomial.N">
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="nBinomial">Muestra (n)</label>
+                                    <input type="number" class="form-control form-control-sm" id="nBinomial" name="nb" [(ngModel)]="datosBinomial.n">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="xBinomial">Exito deseado (x)</label>
+                                    <input type="number" class="form-control form-control-sm" id="xBinomial" name="xb" [(ngModel)]="datosBinomial.x">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="pBinomial">Probabilidad exito (&rho;)</label>
+                                <input type="number" class="form-control form-control-sm" id="pBinomial" name="pb" [(ngModel)]="datosBinomial.p">
+                            </div>
+                            <div class="form-group">
+                                <label for="qBinomial">Probabilidad fracaso (q)</label>
+                                <input type="number" class="form-control form-control-sm" id="qBinomial" name="qb" [(ngModel)]="datosBinomial.q">
+                            </div>
+                        </div>
+
+                        <div *ngIf="distSeleccionada === 1" id="formHipergeometrica" class="animated fadeIn">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="NHipergeometrica">Poblacion (N)</label>
+                                    <input type="number" class="form-control form-control-sm" id="NHipergeometrica" name="NH" [(ngModel)]="datosHiper.N">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="nHipergeometrica">Muestra (n)</label>
+                                    <input type="number" class="form-control form-control-sm" id="nHipergeometrica" name="nH" [(ngModel)]="datosHiper.n">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="THipergeometrica">Total exitos poblacion (T)</label>
+                                <input type="number" class="form-control form-control-sm" id="THipergeometrica" name="TH" [(ngModel)]="datosHiper.T">
+                            </div>
+                            <div class="form-group">
+                                <label for="xHipergeometrica">Exitos deseados (x)</label>
+                                <input type="number" class="form-control form-control-sm" id="xHipergeometrica" name="xH" [(ngModel)]="datosHiper.x">
+                            </div>
+                        </div>
+
+                        <div *ngIf="distSeleccionada === 2" id="fromPoisson" class="animated fadeIn">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="mediaPoisson">Media (&lambda;)</label>
+                                    <input type="number" class="form-control form-control-sm" id="mediaPoisson" name="mediaP" [(ngModel)]="datosPoisson.media">
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label for="xPoisson">Numero de exitos (x)</label>
+                                    <input type="number" class="form-control form-control-sm" id="xPoisson" name="xP" [(ngModel)]="datosPoisson.x">
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+                <div class="card-footer text-muted" style="display: flex; align-items: center; justify-content: center;">
+                    <button type="submit" class="btn btn-info btn-sm" (click)="calcular()">Calcular</button>
+                </div>
+            </div>
+
+            
+
+            <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Resultado: 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div> -->
+
+        </div>
+
+        <div class="col-8" >
+
+            <div class="card animated fadeIn">
+                <div class="card-header">
+                    Grafico
+                </div>
+                <div class="card-body" style="background-color: whitesmoke;">
+                    <canvas baseChart
+                            [datasets]="barChartData"
+                            [labels]="barChartLabels"
+                            [options]="barChartOptions"
+                            [colors]="barChartColors"
+                            [legend]="barChartLegend"
+                            [chartType]="barChartType">
+                            
+                    </canvas>
+                </div>
+                <!-- <div class="card-footer text-muted">
+                    Footer
+                </div> -->
+            </div>
+
+            <div class="alert alert-{{tipoAlert}} animated fadeIn mt-2 d-flex" role="alert" style="color: black;">
+                {{ textoAlert }}
+                <div *ngIf="distSeleccionada === 0" class="animated fadeIn">
+                    <span class="badge badge-secondary animated fadeIn fast" style="font-size: 11pt; margin-left: 7px;">P(x) = {{ resBinomial.px }}</span>
+                    <span class="badge badge-secondary animated fadeIn fast" style="font-size: 11pt; margin-left: 7px;">&mu; = {{ resBinomial.mu }}</span>
+                    <span class="badge badge-secondary animated fadeIn fast" style="font-size: 11pt; margin-left: 7px;">&sigma; = {{ resBinomial.sigma }}</span>
+                    <span *ngIf="resBinomial.fc" class="badge badge-secondary animated fadeIn fast" style="font-size: 11pt; margin-left: 7px;">FC = {{ resBinomial.fc }}</span>
+                </div>
+                <div *ngIf="distSeleccionada === 1" class="animated fadeIn">
+                    <span class="badge badge-secondary animated fadeIn fast" style="font-size: 11pt; margin-left: 7px;">P(x) = {{ resHiper.px }}</span>
+                    <span class="badge badge-secondary animated fadeIn fast" style="font-size: 11pt; margin-left: 7px;">&mu; = {{ resHiper.mu }}</span>
+                    <span class="badge badge-secondary animated fadeIn fast" style="font-size: 11pt; margin-left: 7px;">&sigma; = {{ resHiper.sigma }}</span>
+                </div>
+                <div *ngIf="distSeleccionada === 2" class="animated fadeIn">
+                    <span class="badge badge-secondary animated fadeIn fast" style="font-size: 11pt; margin-left: 7px;">P(x) = {{ resPoisson.px }}</span>
+                    <span class="badge badge-secondary animated fadeIn fast" style="font-size: 11pt; margin-left: 7px;">&mu; = {{ resPoisson.mu }}</span>
+                    <span class="badge badge-secondary animated fadeIn fast" style="font-size: 11pt; margin-left: 7px;">&sigma; = {{ resPoisson.sigma }}</span>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</div>

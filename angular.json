@@ -24,9 +24,15 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "src/assets/libs/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/jquery/dist/jquery.slim.min.js",
+              "node_modules/popper.js/dist/umd/popper.min.js",
+              "node_modules/chart.js/dist/Chart.js",
+              "node_modules/bootstrap/dist/js/bootstrap.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -117,8 +123,15 @@
               "devServerTarget": "distribuciones:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@zeit/ng-deploy:deploy"
         }
       }
-    }},
-  "defaultProject": "distribuciones"
+    }
+  },
+  "defaultProject": "distribuciones",
+  "cli": {
+    "analytics": "7f11ccce-3204-4559-901b-514ea1bedfe4"
+  }
 }

@@ -7,7 +7,8 @@
     "build": "ng build",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "deploy": "ng run distribuciones:deploy"
   },
   "private": true,
   "dependencies": {
@@ -19,6 +20,13 @@
     "@angular/platform-browser": "~9.1.1",
     "@angular/platform-browser-dynamic": "~9.1.1",
     "@angular/router": "~9.1.1",
+    "@zeit/ng-deploy": "^0.3.0",
+    "bootstrap": "^4.4.1",
+    "chart.js": "^2.9.3",
+    "jquery": "^3.4.1",
+    "ng2-charts": "^2.3.0",
+    "now-client": "^5.2.1",
+    "popper.js": "^1.16.1",
     "rxjs": "~6.5.4",
     "tslib": "^1.10.0",
     "zone.js": "~0.10.2"

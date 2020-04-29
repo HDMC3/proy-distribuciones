@@ -1,0 +1,114 @@
+<style>
+    label{
+        font-size: smaller;
+    }
+</style>
+
+<div>
+    <div class="row container">
+
+        
+
+        <div class="col-4" >
+            <div class="card animated fadeIn">
+                <div class="card-header text-center">
+                    <div class="row row-cols-2">
+                        <div class="col">Parametros</div>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <form class="animated fadeIn">
+                        <div class="form-group">
+                            <label for="mu">Velocidad de llegada  ( &lambda; )</label>
+                            <input type="number" class="form-control form-control-sm" id="lambda" name="lambdalambda" [(ngModel)]="datos.lambda">
+                        </div>
+                        <div class="form-group">
+                            <label for="mu">Velocidad de servicio  ( &mu; )</label>
+                            <input type="number" class="form-control form-control-sm" id="mu" name="mumu" [(ngModel)]="datos.mu">
+                        </div>
+                        <div class="form-group">
+                            <label for="n">Cantidad de clientes  ( n )</label>
+                            <input type="number" class="form-control form-control-sm" id="n" name="nn" [(ngModel)]="datos.n">
+                        </div>
+                    </form>
+                </div>
+                <div class="card-footer text-muted" style="display: flex; align-items: center; justify-content: center;">
+                    <button type="submit" class="btn btn-info btn-sm" (click)="calcular()">Calcular</button>
+                </div>
+            </div>
+            <div class="alert alert-{{tipoAlert}} animated fadeIn mt-2" role="alert" style="color: black;">
+                {{ textoAlert }} 
+            </div>
+
+            
+
+            <!-- <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                Resultado: 
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+            </div> -->
+
+        </div>
+
+        <div class="col-8" >
+
+            <div class="card animated fadeIn">
+                <div class="card-header">
+                    Resultados
+                </div>
+                <div class="card-body" style="background-color: whitesmoke;">
+                    <table class="table table-sm table-hover table-bordered">
+                        <thead class="thead-dark">
+                          <tr>
+                            <th scope="col text-center">#</th>
+                            <th scope="col text-center">&lambda;^-1</th>
+                            <th scope="col text-center">&mu;^-1</th>
+                            <th scope="col text-center">Ls</th>
+                            <th scope="col text-center">Ws</th>
+                            <th scope="col text-center">Lq</th>
+                            <th scope="col text-center">Wq</th>
+                            <th scope="col text-center">&rho;</th>
+                            <th scope="col text-center">Po</th>
+                            <th scope="col text-center">P(n)</th>
+                            <th scope="col text-center">#</th>
+                          </tr>
+                        </thead>
+                        <tbody *ngIf="calculos.length !== 0">
+                            <tr *ngFor="let item of calculos; let i = index" class="animated fadeIn" (click)="mostrarParametros(i)">
+                                <td style="color: black;">{{ i }}</td>
+                                <td style="color: black;">{{item.lambdam1}}</td>
+                                <td style="color: black;">{{item.mum1}}</td>
+                                <td style="color: black;">{{item.Ls}}</td>
+                                <td style="color: black;">{{item.Ws}}</td>
+                                <td style="color: black;">{{item.Lq}}</td>
+                                <td style="color: black;">{{item.Wq}}</td>
+                                <td style="color: black;">{{item.ro}}</td>
+                                <td style="color: black;">{{item.Po}}</td>
+                                <td style="color: black;">{{item.Pn}}</td>
+                                <td>
+                                    <button class="btn btn-danger btn-sm" (click)="borrarRegistro(i)">X</button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="d-flex justify-content-center">
+                        <div *ngIf="calculos.length === 0" class="alert alert-light col-5 text-center" role="alert" style="color: black;">
+                            No se han realizado calculos
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div *ngIf="seMostroPrametros" class="alert alert-success animated fadeIn mt-2" role="alert" style="color: black;">
+                Parametros:  
+                <span class="badge badge-secondary animated fadeIn fast" style="font-size: 11pt; margin-left: 7px;">&lambda; = {{ datosMostrar.lambda }}</span>
+                <span class="badge badge-secondary animated fadeIn fast" style="font-size: 11pt; margin-left: 7px;">&mu; = {{ datosMostrar.mu }}</span>
+                <span class="badge badge-secondary animated fadeIn fast" style="font-size: 11pt; margin-left: 7px;">n = {{ datosMostrar.n }}</span>
+            </div>
+
+        </div>
+
+    </div>
+</div>

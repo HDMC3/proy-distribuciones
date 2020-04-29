@@ -1,0 +1,21 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" [routerLink]="['/home']" style="padding: 0px;">
+        <img src="assets/img/desarrollo.png" width="50" height="50" alt="">
+    </a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/distri']" style="font-size: large;">Distribuciones</a>
+        </li>
+
+        <li class="nav-item" routerLinkActive="active">
+          <a class="nav-link" [routerLink]="['/colas']" style="font-size: large;">Colas</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
